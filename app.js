@@ -37,10 +37,6 @@ io.on('connection', function(socket) {
 
 });
 
-<<<<<<< HEAD
 app.listen(5000,function(){
-=======
-app.listen(80,function(){
->>>>>>> 1a4f30c5617f748b513fce85eed150e4232fb2b0
     console.log("app is listening");
 });
