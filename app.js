@@ -33,6 +33,6 @@ io.on('connection', function(socket) {
 
 });
 
-app.listen(3000,function(){
+app.listen(80,function(){
     console.log("app is listening");
 });
