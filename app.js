@@ -3,7 +3,7 @@ var http = require('http');
 // Send index.html to all requests
 var app = http.createServer(function(req, res) {
 
-    res.end(index);
+    res.end("from spanish game server");
 });
 
 // Socket.io server listens to our app
@@ -28,11 +28,15 @@ io.on('connection', function(socket) {
             console.log("player position update",uid,x,y);
 
         });
+        socket.on("hand",function(x,y){
+            socket.to(roomID).emit("update-hand",uid,x,y);
+            console.log("player hand update",uid,x,y);
+        })
     });
 
 
 });
 
-app.listen(3000,function(){
+app.listen(5000,function(){
     console.log("app is listening");
 });
