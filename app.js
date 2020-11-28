@@ -22,6 +22,7 @@ io.on('connection', function(socket) {
     // Use socket to communicate with this particular client only, sending it it's own id
     socket.on('join', function(roomID,uid){//first time user must also notify other players here besides updating firebase, because all the player only loads firebase
         socket.join(roomID);
+        socket.to(roomID).emit("new-player");
         console.log("player joined");
         socket.on('position',function(x,y){
             socket.to(roomID).emit("update-position",uid,x,y);
@@ -31,6 +32,14 @@ io.on('connection', function(socket) {
         socket.on("hand",function(x,y){
             socket.to(roomID).emit("update-hand",uid,x,y);
             console.log("player hand update",uid,x,y);
+        })
+        
+        socket.on("inventory",function(inventoryJson){
+            socket.to(roomID).emit("update-inventory",inventoryJson);
+            //console.log("player hand update",uid,x,y);
+        })
+        socket.on("attack",function(){
+            socket.to(roomID).emit("update-attack",uid);
         })
     });
 
